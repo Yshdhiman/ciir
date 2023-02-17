@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("wodden.jpg");
+            background-repeat: no-repeat;
+            background-size:cover;
+            overflow: hidden;
+            z-index: -1;
+        }
+        h1 {
+            color:white;
+            font-variant: small-caps;
+            font-size: 60px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        #container {
+            margin: 30px 150px 300px 150px;
+        }
+        #form {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 20px 30px;
+        }
+        .row {
+            margin: 0 10px;
+        }
+
+        .input {
+            width:60%;
+            float: left;
+        }
+        .label {
+            width: 40%;
+            float: left;
+            font-size: 20px;
+        }
+        label { color: white;}
+        input[type=text] {
+            display: inline-block;
+            width:100%px;
+            height: 35px;
+            font-size: 18px;
+            outline:none;
+            border:2.5px solid #ccc9c9;
+            border-radius: 10px;
+            transition: 0.5s;
+            letter-spacing: 0.5px;
+            background-color: rgba(46, 44, 44, 0.781);
+            color: rgba(233, 227, 227, 0.911);
+            padding: 10px 10px;
+        }
+        input[type=text]:focus {
+            border:2.5px solid #979696;
+            background-color: rgba(104, 100, 100, 0.61);
+        }
+        input[type=submit] {
+            width: 160px;
+            font-size: 20px;
+            padding: 20px 10px;
+            border-radius: 50px;
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            letter-spacing: 1px;
+        }
+        .submit {
+            display: flex;
+            margin:0;
+            position: relative;
+            left: 50%;
+            display: flex;
+            justify-content: center;
+        }
+        span {
+            display: block;
+            color: rgb(252, 42, 42);
+            font-size: 17px;
+            font-weight: bold;
+        }
+        .conpass {
+            visibility: hidden;
+        }
+        /* responsive */
+        @media only screen and (max-width: 560px) {
+            #container h1 {font-size: 35px;}
+            #container label{font-size: 18px;}
+            .row input[type="text"] {
+                font-size: 15px;
+            }
+            body #container {
+                margin: 60px 35px 300px;
+            }
+            input[type="submit"] {
+                font-size: 18px;
+                padding:15px 0;
+                width:140px;}
+        }
+        @media only screen and (max-width: 800px) {
+            #container h1 {font-size: 40px;}
+            #container {
+                margin: 60px 60px 300px 60px;
+            }
+            #container .submit {
+            position: relative;
+            left: 0;
+            top:-100px;
+            }
+        }
+        @media only screen and (max-width: 900px) {
+            #container #form div {
+                display: flex;
+                flex-direction: column;
+
+            }
+            .input {width:100%;margin-top: 10px;}
+            .gender {
+                position: relative;
+                left:60%;
+                top:-20px;
+            }
+        }
+        @media only screen and (max-width: 1180px) {
+            body {
+                overflow-y: scroll;
+            }
+            h1 {
+                font-size:50px
+            }
+            #form {
+                display: grid;
+                grid-template-columns: auto;
+                gap: 18px 0;
+            }
+            label {
+                font-size: 22px;
+            }
+            .submit {
+            position: relative;
+            left: 0;
+            top:-60px;
+            display: flex;
+            justify-content: center;
+        }
+            input[type=text] {
+                padding: 15px 10px;
+                font-size: 18px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Form Validation</h1>
+        <form action="#" id="form" onsubmit="return formValidation()" >
+            <div class="row">
+                <div class="label"><label for="fname">First Name</label></div>
+                <div class="input"><input type="text" id="fname" name="fname" autocomplete="off" placeholder="Enter your first name">
+                <span id="fnameDes">&nbsp</span></div>
+            </div>
+            <div class="row">
+                <div class="label"><label for="lname">Last Name</label></div>
+                <div class="input"><input type="text" id="lname" name="lname" autocomplete="off" placeholder="Enter your last name">
+                <span id="lnameDes">&nbsp</span></div>
+            </div>
+            <div class="row">
+                <div class="label"><label for="email">Email</label></div>
+                <div class="input"><input type="text" id="email" name="email" autocomplete="off" placeholder="Enter your email Id">
+                <span id="emailDes">&nbsp</span></div>
+            </div>
+            <div class="row">
+                <div class="label"><label for="number">Phone Number</label></div>
+                <div class="input"><input type="text" id="num" name="phnNo." autocomplete="off" placeholder="Enter your phone number">
+                <span id="numDes">&nbsp</span></div>
+            </div>
+            <div class="row">
+                <div class="label"><label for="user">User ID</label></div>
+                <div class="input"><input type="text" id="user" name="userId" autocomplete="off" placeholder="Enter your user Id">
+                <span id="userDes">&nbsp</span></div>
+            </div>
+            <div class="row">
+                <div class="label"><label id="gender">Gender</label></div>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male" class="gender">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female" class="gender">Female</label><span id="genderDes">*optional*</span>
+            </div>
+            <div class="row">
+                <div class="label"><label for="pass">Password</label></div>
+                <div class="input"><input type="text" id="pass" name="pass" autocomplete="off" placeholder="Enter your password">
+                <span id="passDes">&nbsp</span></div>
+            </div>
+            <div class="row">
+                <div class="label"><label for="conpass" class="conpass">Confirm Password</label></div>
+                <div class="input"><input type="text" class="conpass" name="conpass" autocomplete="off" placeholder="Re-enter your password">
+                <span id="conpassDes">&nbsp</span></div>
+            </div>
+            <div class="submit">
+                <div><input type="submit" id="submit" value="SUBMIT"></div>
+            </div>
+        </form>
+    </div>
+    <!-- validation -->
+    <script>
+        function formValidation() {
+            
+            var fname = document.getElementById("fname").value;
+            var lname = document.getElementById("lname").value;
+            var email = document.getElementById("email").value;
+            var num = document.getElementById("num").value;
+            var user = document.getElementById("user").value;
+            var pass = document.getElementById("pass").value;
+            var btn = document.getElementById("submit");
+               
+            var fnameDes = document.getElementById("fnameDes");
+            var lnameDes = document.getElementById("lnameDes");
+            var emailDes = document.getElementById("emailDes");
+            var numDes = document.getElementById("numDes");
+            var userDes = document.getElementById("userDes");
+            var passDes = document.getElementById("passDes");
+
+            const name =   /^[A-Za-z]+$/;
+            const number = /^[0-9]+$/;
+            const valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            const pswd = "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})";
+            // for all
+            if(fname == ""){
+                fnameDes.innerHTML = "**Can not be empty**";
+            }
+            if(lname == ""){
+                lnameDes.innerHTML = "**Can not be empty**";
+            }
+            if(email == ""){
+                emailDes.innerHTML = "**Can not be empty**";
+            }
+            if(num == ""){
+                numDes.innerHTML = "**Can not be empty**";
+            }
+            if(user == ""){
+                userDes.innerHTML = "**Can not be empty**";
+            }
+            if(pass == ""){
+                passDes.innerHTML = "**Can not be empty**";
+            }
+
+            //first Name
+            if(fname == ""){
+                fnameDes.innerHTML = "**Can not be empty**";
+                document.getElementById("fname").focus();
+                return false;
+            } if(fname.includes(" ")){
+                fnameDes.innerHTML = "**spaces are not allowed**";
+                document.getElementById("fname").focus();
+                return false;
+            } if(!(name.test(fname))){
+                fnameDes.innerHTML = "only alphabets are allowed";
+                document.getElementById("fname").focus();
+                return false;
+            } if(fname.length < 3){
+                fnameDes.innerHTML = "**use more than 3 characters**";
+                document.getElementById("fname").focus();
+                return false;
+            } else{
+                fnameDes.innerHTML = "&nbsp";
+            }
+            // last name
+            if(lname == ""){
+                lnameDes.innerHTML = "**Can not be empty**";
+                document.getElementById("lname").focus();
+                return false;
+            } if(lname.includes(" ")){
+                lnameDes.innerHTML = "**spaces are not allowed**"
+                document.getElementById("lname").focus();
+                return false;
+            } if(!(name.test(lname))){
+                lnameDes.innerHTML = "**only alphabets are allowed**";
+                document.getElementById("lname").focus();
+                return false;
+            } if(lname.length < 3){
+                lnameDes.innerHTML = "**use more than 3 characters**";
+                document.getElementById("lname").focus();
+                return false;
+            } else{
+                lnameDes.innerHTML = "&nbsp";
+            }
+            //email
+            if(email == ""){
+	            emailDes.innerHTML = "**can not be empty!**";
+	            document.getElementById('email').focus();
+	            return false;
+	        } if(email.includes(" ")){
+	            emailDes.innerHTML = "**spaces are not allowed!**";
+	            document.getElementById('email').focus();
+	            return false;
+	        } if(valid.test(email)){
+	            emailDes.innerHTML = "&nbsp";
+            
+	        } else{
+	            emailDes.innerHTML = "**invalid email!**";
+	            document.getElementById('email').focus();
+	            return false;
+	        }
+            // number
+            if(num == ""){
+                numDes.innerHTML = "**Can not be empty**";
+                document.getElementById("num").focus();
+                return false;
+            } if(num.includes(" ")){
+                numDes.innerHTML = "**spaces are not allowed**"
+                document.getElementById("num").focus();
+                return false;
+            } if(!(number.test(num))){
+                numDes.innerHTML = "**only numbers are allowed**";
+                document.getElementById("num").focus();
+                return false;
+            } if(num.length != 10){
+                numDes.innerHTML = "**only 10 digits are allowed**";
+                document.getElementById("num").focus();
+                return false;
+            } else {
+                numDes.innerHTML = "&nbsp";
+            }
+            //user
+            if(user == ""){
+                userDes.innerHTML = "**Can not be empty**";
+                document.getElementById("user").focus();
+                return false;
+            } if(user.includes(" ")){
+                userDes.innerHTML = "**spaces are not allowed**";
+                document.getElementById("user").focus();
+                return false;
+            } else {
+                userDes.innerHTML = "&nbsp";
+            }
+            //password
+            if(pass == ""){
+                passDes.innerHTML = "**Can not be empty**";
+                document.getElementById("pass").focus();
+                return false;
+            } if(pass.includes(" ")){
+                passDes.innerHTML = "**spaces are not allowed**";
+                document.getElementById("pass").focus();
+                return false;
+            } if(pass.length < 6){
+                passDes.innerHTML = "**add minimum 6 characters**";
+                document.getElementById("pass").focus();
+                return false;
+            } if(!(pass.test(pswd))) {
+                passDes.innerHTML = "**use one number or letter **";
+                document.getElementById("pass").focus();
+                return false;
+            } else {
+                passDes.innerHTML = "&nbsp";
+            }                      
+        }
+    </script>
+</body>
+</html>
