@@ -16,6 +16,7 @@
            box-sizing: border-box;
            margin:0;
            padding:0;
+           user-select: none;
         }
 
         body {
@@ -422,14 +423,14 @@
             #container1 p {font-size: 17px;}
             #container1 h1 {font-size: 27px;}
             #container2 h1 {font-size:25px}
-        }
-        @media only screen and (max-width: 800px) {
             #container6_row #box1, #box2, #box3 {
                 grid-column-start: 1;
                 grid-column-end: 3;
-                font-size: 3vw;
+                font-size: 2.9vw;
             }
-            #container6 #container6_row .center_layer {font-size: 4.3vw;}
+            #container6 #container6_row .center_layer {font-size: 4.2vw;}
+        }
+        @media only screen and (max-width: 800px) {
             #container5 #container5_row .circle {
                 width: 33vw;
                 height: 33vh;
@@ -485,23 +486,23 @@
             #topnav a:not(.active2) {
                 text-align: left;
                 background-color: #14355d;
-                padding:12px 90px 12px 20px;
+                padding:10px 90px 10px 20px;
                 color: rgba(255,255,255);
-                font-size: 20px;
+                font-size: 16px;
                 margin:0;
             }
             #header #topnav a.active2 {
                 color: rgba(255,255,255);
-                font-size: 20px;
+                font-size: 16px;
                 border: none;
             }
             #show {display: block;}
         }
-        @media only screen and (max-width: 1070px) {
+        @media only screen and (max-width: 1090px) {
             #topnav {
                 overflow: hidden;
                 display: flex;
-                margin: 8px 0 10px 90px;
+                margin: 8px 0 10px 120px;
                 align-items: center;
             }
         }
@@ -537,7 +538,7 @@
             <a href="#whyCiirs">Why Ciirs</a>
             <a href="#pricing">Pricing</a>
             <a href="#portfolio">Portfolio</a>
-            <a href="formValidation.html" target="_blank">Register</a>
+            <a href="/Assign 2/formValidation.html" target="_blank">Register</a>
             <a href="callUS" class="active2">Call Us</a>
         </div>
         <div id="show"><a href="#" id="btn2" class="fa-solid fa-bars"></a></div>
@@ -546,10 +547,10 @@
         const nav = document.getElementById("topnav");
         const btn = document.getElementById("btn2");
         btn.onclick = function(){ 
-            if(nav.style.display !== "none"){
-                document.getElementById("topnav").style.display = "none";
-            } else {
+            if(nav.style.display == "none"){
                 document.getElementById("topnav").style.display = "grid";
+            } else {
+                document.getElementById("topnav").style.display = "none";
             }
         }
     </script>
